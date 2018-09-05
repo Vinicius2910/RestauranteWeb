@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"/>
+<title>Parâmetro</title>
+
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/homeLojista">Home</a></li>
+      <li><a href="/promocoes">Manter Promoções</a></li>
+      <li><a href="/premios">Manter Premio</a></li>
+	  <li class="active"><a href="/parametro">Parametro</a></li>
+      <li><a href="#">Sobre</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<form class="form-horizontal" name="pontuacao" thod="post" action="/cadastrarParametro">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h1 class="panel-title">Escolha o parâmetro</h1>
+		</div>
+				
+		<div class="panel-body">
+		 <div class="container-fluid">		
+		  <div class="row">
+    		<div class="col-md-4 ">
+    			<div class="paddingTop">
+    			 <input type="hidden" name="codigo" value="1"/>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="porVisita" name="tipo" class="custom-control-input" value="1">
+						<label class="custom-control-label" for="porVisita">Ponto por visita</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="porValor" name="tipo" class="custom-control-input" value="2" >
+						<label class="custom-control-label" for="porValor">Pontuação por valor</label>
+					</div>
+					<div id="valor" class="col-md-12" >
+						<div class="col-md-5" >
+							<h4>Digite o valor:</h4> 
+						</div>
+						<div class="col-md-7" >
+							<input class="form-control" type="text" name="campoValor" id="campoValor">
+						</div>
+					</div>
+				</div>
+			</div>	
+		  </div>
+		  <div class="row">
+			  <div class="col-md-12">
+				<div class="form-group botoes">
+					<br>
+						<button type="submit" class="btn btn-success btn-sm" data-title="cadastrarParametro" 
+						data-toggle="modal" data-target="#cadastrarParametro"  >Cadastrar</button>
+  						<button class="btn btn-danger btn-sm ">Cancelar</button>
+				</div>
+			  </div>
+		  </div>
+			
+		 </div>	
+		</div>	
+	</div>
+	
+</form>
+
+<div class="modal fade" id="cadastrarParametro" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+ <form id="formParametro" method="POST" action="/cadastrarParamerto">	
+	
+	<input type="hidden" value="1"/>
+	<input type="hidden" value="1"/>
+	<input type="hidden" value="1"/>
+				
+	
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Cadastrar Parâmetro</h4>
+      </div>
+          <div class="modal-body">
+       
+       <div></span> Cadastrado com Sucesso</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Obrigado!</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+ </form> <!-- /.modal-dialog --> 
+</div>
+
+	
+
+</body>
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script>
+$(function(){
+	$('#valor').hide();   
+    $('#porValor').change(function(){
+        $('#valor').show();
+        $('#campoValor').mask('000,00');
+        
+    });
+    $('#porVisita').change(function(){    
+        $('#valor').hide();
+        $("#campoValor").val("0");
+    });
+});         
+</script>
+	
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/buttonJS.min.js"></script>
+</html>

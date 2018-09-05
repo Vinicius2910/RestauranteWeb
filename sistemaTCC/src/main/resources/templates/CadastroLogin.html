@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/cadastroLogin.css"/>
+<meta charset="UTF-8">
+<title>Cadastro Login</title>
+</head>
+<body>
+
+<form class="form-horizontal" >
+<fieldset>
+<div class="panel panel-primary">
+    <div class="panel-heading">Cadastro de Cliente</div>
+    
+    <div class="panel-body">
+<div class="form-group">
+
+<div class="col-md-11 control-label">
+        <p class="help-block"><h11>*</h11> Campo Obrigatório </p>
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>  
+  <div class="col-md-8">
+  <input id="Nome" name="nome" placeholder="Digite seu nome" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
+  <div class="col-md-5">
+  <input id="cpf" name="cpfCNPJ" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+  </div>
+</div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="prependedtext">Email <h11>*</h11></label>
+  <div class="col-md-5">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <input id="prependedtext" name="email" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="vinculo">Senha <h11>*</h11></label>  
+  <div class="col-md-5">
+  	<div class="input-group">
+  		<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  		<input id="senha" name="senha" placeholder="Digite aqui sua senha" class="form-control input-md" required="" type="text">
+  	</div>	
+  </div>
+ </div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Cadastrar"></label>
+  <div class="col-md-8">
+    <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit" data-title="Sucesso"
+			data-toggle="modal" data-target="#sucesso" th:href="@{/cadastrarUsuario}">Cadastrar</button>
+    <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset" href="/login">Cancelar</button>
+  </div>
+</div>
+
+</div>
+</div>
+</fieldset>
+
+<div class="modal fade" id="sucesso" tabindex="-1" role="dialog" aria-labelledby="sucesso" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- /.CHAMANDO MODAL ModalDeSucesso.html pelo controller -->
+			</div>
+		</div>
+	</div>
+
+
+</form></body>
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/cadastroLogin.js"></script>
+</html>

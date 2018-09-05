@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"/>
+<title>Pontuacao</title>
+
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/homeLojista">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h1 class="panel-title">Você tem <span th:text="${cliente.pontuacao}"></span> Pontos disponíveis.</h1>
+		</div>
+	</div>
+	
+<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h1 class="panel-title">PREMIOS DISPONIVEIS</h1>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped table-sm">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>PREMIO</th>
+						<th>Quantidade Pontos</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each= "premio : ${premios}">
+						<td th:text="${premio.codigo}"></td>
+						<td th:text="${premio.nome}"></td>
+						<td th:text="${{premio.qtdPontos}}"></td>
+						<td>
+							<button class="btn btn-success btn-xs" data-title="Edit"
+								data-toggle="modal" data-target="#edit" th:href="@{/premios/{codigo}(codigo=${premio.codigo})}">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(premios)}"> Nenhuma Promoção foi encontrada!! </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+<div class="panel panel-warning" id="warning">
+		<div class="panel-heading">
+			<h1 class="panel-title">Pontos em Analise</h1>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped table-sm">
+				<thead>
+					<tr>
+						<th>CPF</th>
+						<th>DATA</th>
+						<th>STATUS</th>
+						<th>VALOR</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each= "pendente : ${pontuacaoPendente}">
+						<td th:text="${pendente.cpf}"></td>
+						<td>06/09/2018</td>
+						<td th:text="${{pendente.status}}"></td>
+						<td>R$</td>
+					</tr>
+					
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(pontuacaoPendente)}"> Não existe nenhuma pontuação pendente!! </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+
+<div class="modal fade" id="cadastrarParametro" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">PARABÉNS</h4>
+      </div>
+       <div class="modal-body">
+	       <div>
+	        <p>Parabéns caro usuário, você acabou de ganhar 1000 pontos.</p>
+	        <p>OBRIGADO PELA VISITA!!!</p>
+	        </div>
+	       
+      </div>
+        <div class="modal-footer ">
+        <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> OK!</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+	
+								
+</body>
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script src="/js/bootstrap.min.js"></script>
+</html>

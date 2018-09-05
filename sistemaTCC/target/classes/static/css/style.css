@@ -1,0 +1,25 @@
+
+
+.panel-default {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.panel-primary{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.panel-success{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.paddingTop{
+	padding-top: 16px;
+}
+
+.botoes{
+	padding-left: 20px;
+	margin-left: 30px;
+}
