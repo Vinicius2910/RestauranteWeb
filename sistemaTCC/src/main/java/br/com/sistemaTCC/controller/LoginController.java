@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.sistemaTCC.model.Lojista;
+import br.com.sistemaTCC.repository.Clientes;
 import br.com.sistemaTCC.repository.Lojistas;
 
 @Controller
 public class LoginController {
 	@Autowired
 	private Lojistas lojistas;
+
+	@Autowired
+	private Clientes clientes;
 	
 	@RequestMapping("/login")
 	public String login(){
@@ -29,7 +33,7 @@ public class LoginController {
 	   return "ModalDeSucesso";
 	}
 	
-	@RequestMapping(value="/validarLogin", method= RequestMethod.POST)
+	@RequestMapping(value="/validarLoginLojista", method= RequestMethod.POST)
 	public String validarLogin(Lojista lojista){
 		boolean existe = lojistas.existsById(lojista.getCpfCNPJ());
 		
@@ -41,5 +45,5 @@ public class LoginController {
 		}
 	   
 	}
-
+	
 }

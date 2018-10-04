@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Media de pontos Cliente</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">WebSiteName</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/homeLojista">Home</a></li>
+				<li><a href="/promocoes">Manter Promoções</a></li>
+				<li><a href="/premios">Manter Premio</a></li>
+				<li><a href="/parametro">Parametro</a></li>
+				<li><a href="/consultarClientes">Clientes Ativos</a></li>
+				<li class="active"><a href="/mediaClientes">Media Clientes</a></li>
+				<li><a href="#">Sobre</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="panel panel-primary">
+
+		<div class="panel-heading">
+			<h1 class="panel-title">Media de pontos do mês</h1>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped table-sm">
+				<thead>
+					<tr>
+						<th>Quantidade total de clientes</th>
+						<th>Media de pontos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${totalClientes}"></td>
+						<td th:text="${media}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</html>

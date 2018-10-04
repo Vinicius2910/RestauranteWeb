@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/cadastroLogin.css"/>
+<meta charset="UTF-8">
+<title>Cadastro Cliente</title>
+</head>
+<body>
+
+<form class="form-horizontal" method="post" action="/cadastrarCliente" th:object="${cliente}" >
+<fieldset>
+<div class="panel panel-primary">
+    <div class="panel-heading">Cadastro de Cliente</div>
+    
+    <div class="panel-body">
+<div class="form-group">
+
+<div class="col-md-11 control-label">
+        <p class="help-block"><h11>*</h11> Campo Obrigatório </p>
+</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group" >
+  <label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>  
+  <div class="col-md-8">
+  <input id="Nome" name="nome" placeholder="Digite seu nome" class="form-control input-md" required type="text">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
+  <div class="col-md-5">
+  <input id="cpf" name="cpfCNPJ" placeholder="Apenas números" class="form-control input-md" required th:field="*{cpf}"  type="text" maxlength="11" pattern="[0-9]+$">
+  </div>
+</div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="prependedtext">Telefone <h11>*</h11></label>
+  <div class="col-md-5">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <input id="prependedtext" name="telefone" class="form-control" placeholder="0000-0000" required type="text" >
+      <input type="hidden" name="pontuacao" id="pontuacao" value="0">
+    </div>
+  </div>
+</div>
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Cadastrar"></label>
+  <div class="col-md-8">
+    <button id="Cadastrar" name="Cadastrar" class="btn btn-success" onclick="enviar()" type="Submit" >Salvar</button>
+  </div>
+</div>
+
+</div>
+</div>
+</fieldset>
+
+<div class="modal fade" id="sucesso" tabindex="-1" role="dialog" aria-labelledby="sucesso" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- /.CHAMANDO MODAL ModalDeSucesso.html pelo controller -->
+			</div>
+		</div>
+	</div>
+
+
+</form></body>
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script>
+$(function(){
+	$('#divValor').hide();  
+	$("#valor").val("0");
+});         
+</script>
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/buttonJS.min.js"></script>
+</html>

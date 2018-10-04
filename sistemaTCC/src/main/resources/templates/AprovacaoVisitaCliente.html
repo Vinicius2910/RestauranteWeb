@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Aprovação de visita</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">WebSiteName</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/homeLojista">Home</a></li>
+				<li class="active"><a href="/promocoes">Aprovar pontos</a></li>
+				<li><a href="#">Sobre</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="panel panel-primary">
+
+		<div class="panel-heading">
+			<h1 class="panel-title">APROVAÇÕES PENDENTES</h1>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped table-sm">
+				<thead>
+					<tr>
+						<th>CPF</th>
+						<th>DATA</th>
+						<th>STATUS</th>
+						<th>VALOR</th>
+						<th>AÇÕES</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each= "pendente : ${pontuacaoPendente}">
+						<td th:text="${pendente.cpf}"></td>
+						<td th:text="${{pendente.data}}"></td>
+						<td th:text="${{pendente.status}}"></td>
+						<td>R$</td>
+						<td>
+							<button class="btn btn-success btn-xs" data-title="Edit"
+								data-toggle="modal" data-target="#edit" th:href="@{/caixa/{codigo}(codigo=${pendente.cpf})}">
+								<span class="glyphicon glyphicon-ok-sign"></span>
+							</button>
+							<button class="btn btn-danger btn-xs" data-title="Delete"
+								data-toggle="modal" data-target="#delete" th:href="@{/rejeitarPonto/{codigo}(codigo=${pendente.cpf})}">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(pontuacaoPendente)}"> Nenhuma Promoção foi encontrada!! </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+
+	<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- /.CHAMANDO PAGINA EditarPromocao.html pelo controller -->
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			 	<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title custom_align" id="Heading">Aprovar
+						Ponto</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input class="form-control" type="text" name="cpf" placeholder="Digite o CPF" >
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="data" placeholder="data" >
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="status" placeholder="status" >
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="valor" placeholder="Digite o valor">
+					</div>
+				</div>
+				<div class="modal-footer ">
+					<button type="submit" class="btn btn-warning btn-lg"
+						style="width: 100%;">
+						<span class="glyphicon glyphicon-ok-sign"></span> Aprovar
+					</button>
+				</div>
+				<!-- /.CHAMANDO PAGINA ExcluirPromocao.html pelo controller -->
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</html>

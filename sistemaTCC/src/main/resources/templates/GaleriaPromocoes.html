@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"/>
+<title>Galeria Promocoes</title>
+
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/homeLojista">Home</a></li>
+      <li class="active"><a href="/homeLojista">PROMOÇÕES</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h1 class="panel-title">PROMOÇÕES</h1>
+		</div>
+	
+	<br>
+ <div class="row text-center galeria" id="galeria" >
+  <div class="col-sm-4" th:each= "promocao : ${promocoes}">
+    <div class="thumbnail">
+      <img class="img-thumbnail" src="/img/promocao.jpg/">
+      <br>
+      <strong><p th:text="${promocao.nome}" ></p></strong>
+      <p><strong>Data Inicio: </strong><span th:text="${promocao.dataInicio}"></span></p>
+      <p><strong>Data Fim: </strong><span th:text="${promocao.dataFim}"></span></p>
+      <button class="btn btn-primary">Ver mais</button>
+    </div>
+  </div>
+  	
+</div>
+</div>							
+</body>
+<script src="/js/jquery-1.11.0.min.js"></script>	
+<script src="/js/bootstrap.min.js"></script>
+</html>

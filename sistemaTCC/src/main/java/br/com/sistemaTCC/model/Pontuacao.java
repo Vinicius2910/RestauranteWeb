@@ -1,9 +1,14 @@
 package br.com.sistemaTCC.model;
 
-import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Pontuacao {
@@ -11,7 +16,9 @@ public class Pontuacao {
 	@Id
 	private Long cpf;
 	
-	private Calendar data;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date data;
 	
 	@NotNull
 	private String status;
@@ -26,11 +33,11 @@ public class Pontuacao {
 		this.cpf = cpf;
 	}
 
-	public Calendar getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
