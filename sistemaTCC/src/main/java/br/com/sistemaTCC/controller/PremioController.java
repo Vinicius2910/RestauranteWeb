@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
+
+import br.com.sistemaTCC.model.Cliente;
 import br.com.sistemaTCC.model.Premio;
+import br.com.sistemaTCC.repository.Clientes;
 import br.com.sistemaTCC.repository.Premios;
 
 @Controller
@@ -16,6 +20,9 @@ public class PremioController {
 	
 	@Autowired
 	private Premios premios;
+	
+	@Autowired
+	private Clientes clientes;
 	
 	@RequestMapping("/premios")
 	public ModelAndView tabelaPremios() {
@@ -29,6 +36,32 @@ public class PremioController {
 	public String salvar(Premio premio){
 		premios.save(premio);
 		return "redirect:/premios";	
+	}
+
+	@RequestMapping("/resgatarPremio/{codigo}")
+	public ModelAndView resgatarPremio(@PathVariable Long id){
+		String ids = id.toString(); 
+		String [] listId = ids.split("-");
+		Long cpf = Integer.toUnsignedLong(Integer.parseInt(listId[0]));
+		Long codigo = Integer.toUnsignedLong(Integer.parseInt(listId[1]));
+		
+		Premio premio = premios.getOne(codigo);
+		Cliente cliente = clientes.getOne(cpf);
+		if( cliente.getPontuacao() < premio.getQtdPontos())
+		{
+			ModelAndView mv = new ModelAndView("FalhouResgatarPremio");
+			return mv;
+		}
+		else
+		{
+			ModelAndView mv = new ModelAndView("ResgatarPremio");
+			cliente.setPontuacao(cliente.getPontuacao() - premio.getQtdPontos());
+			clientes.save(cliente);
+			mv.addObject(premio);
+			mv.addObject(cliente);
+			return mv;	
+		}
+			
 	}
 
 	@RequestMapping("/premios/{codigo}")

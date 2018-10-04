@@ -61,4 +61,11 @@ public class PromocaoController {
 		return mv;
 	}
 	
+	@RequestMapping("/galeriaPromocoes")
+	private ModelAndView galeriaPromocoes(){
+		List <Promocao> promocao = promocoes.findAll();
+		ModelAndView mv= new ModelAndView("GaleriaPromocoes");
+		mv.addObject("promocoes", promocao);
+		return mv;
+	}
 }

@@ -21,6 +21,8 @@
       <li><a href="/promocoes">Manter Promoções</a></li>
       <li><a href="/premios">Manter Premio</a></li>
 	  <li class="active"><a href="/parametro">Parametro</a></li>
+	  <li><a href="/consultarClientes">Clientes Ativos</a></li>
+	  <li><a href="/mediaClientes">Media Clientes</a></li>
       <li><a href="#">Sobre</a></li>
     </ul>
   </div>
@@ -47,12 +49,12 @@
 						<input type="radio" id="porValor" name="tipo" class="custom-control-input" value="2" >
 						<label class="custom-control-label" for="porValor">Pontuação por valor</label>
 					</div>
-					<div id="valor" class="col-md-12" >
+					<div id="divValor" class="col-md-12" >
 						<div class="col-md-5" >
 							<h4>Digite o valor:</h4> 
 						</div>
 						<div class="col-md-7" >
-							<input class="form-control" type="text" name="campoValor" id="campoValor">
+							<input class="form-control" type="text" name="valor" id="valor">
 						</div>
 					</div>
 				</div>
@@ -109,15 +111,17 @@
 <script src="/js/jquery-1.11.0.min.js"></script>	
 <script>
 $(function(){
-	$('#valor').hide();   
+	$('#divValor').hide();  
+	
     $('#porValor').change(function(){
-        $('#valor').show();
-        $('#campoValor').mask('000,00');
+        $('#divValor').show();
+        $('#valor').mask('000,00');
         
     });
     $('#porVisita').change(function(){    
-        $('#valor').hide();
-        $("#campoValor").val("0");
+        $('#divValor').hide();
+        $("#valor").val(0);
+      
     });
 });         
 </script>
