@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
+<div th:object="${lojista}">
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -17,19 +18,21 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/homeLojista">Home</a></li>
-      <li><a href="/promocoes">Manter Promoções</a></li>
-      <li><a href="/premios">Manter Premio</a></li>
-	  <li class="active"><a href="/parametro">Parametro</a></li>
-	  <li><a href="/consultarClientes">Clientes Ativos</a></li>
-	  <li><a href="/mediaClientes">Media Clientes</a></li>
-      <li><a href="#">Sobre</a></li>
-    </ul>
+    			<li><a href="/HomeLojista">Home</a></li>
+				<li><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
+				 >Manter Promoções</a></li>
+				<li><a th:href="@{/premiosPorId/{cpf}(cpf=${lojista.cpfCNPJ})}">Manter Premio</a></li>
+				<li class="active"><a th:href="@{/parametro/{cpf}(cpf=${lojista.cpfCNPJ})}">Parametro</a></li>
+				<li><a th:href="@{/consultarClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Clientes Ativos</a></li>
+				<li><a th:href="@{/mediaClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Media Clientes</a></li>
+				<li><a href="#">Sobre</a></li>
+	</ul>
   </div>
 </nav>
+</div>
+<div th:object="${lojista}">
 
-
-<form class="form-horizontal" name="pontuacao" thod="post" action="/cadastrarParametro">
+ <form class="form-horizontal" name="pontuacao" thod="post" th:action="@{/cadastrarParametro/{cpf}(cpf=${lojista.cpfCNPJ})}">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h1 class="panel-title">Escolha o parâmetro</h1>
@@ -40,8 +43,7 @@
 		  <div class="row">
     		<div class="col-md-4 ">
     			<div class="paddingTop">
-    			 <input type="hidden" name="codigo" value="1"/>
-					<div class="custom-control custom-radio">
+    			 	<div class="custom-control custom-radio">
 						<input type="radio" id="porVisita" name="tipo" class="custom-control-input" value="1">
 						<label class="custom-control-label" for="porVisita">Ponto por visita</label>
 					</div>
@@ -76,7 +78,7 @@
 	</div>
 	
 </form>
-
+</div>
 <div class="modal fade" id="cadastrarParametro" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
  <form id="formParametro" method="POST" action="/cadastrarParamerto">	
 	

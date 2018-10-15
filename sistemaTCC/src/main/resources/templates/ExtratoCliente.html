@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+ 				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title custom_align" id="Heading">Historico de Ações
+						</h4>
+				</div>
+				<div class="modal-body">
+			
+			<table class="table table-bordered table-striped table-sm">
+				<thead>
+					<tr>
+						<th>Cliente CPF</th>
+						<th>Data</th>
+						<th>Transação</th>
+						<th>Pontuação Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each= "transacao : ${transacoes}">
+						<td th:text="${{transacao.clienteID}}"></td>
+						<td th:text="${{transacao.data}}"></td>
+						<td th:text="${transacao.pontos}+' Pontos'"></td>
+						<td th:text="${transacao.pontuacaoTotal}"></td>
+					</tr>
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(transacoes)}"> Nenhuma Transação foi encontrada!! </td>
+					</tr>
+				</tbody>
+			</table>
+				</div>
+				<div class="modal-footer ">
+					<button class="btn btn-danger btn-sm" data-dismiss="modal" >Fechar</button>
+				</div>
+</body>
+</html>

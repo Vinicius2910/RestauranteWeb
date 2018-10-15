@@ -20,8 +20,8 @@
   </div>
 </nav>
 
-
-<form class="form-horizontal" method="POST" action="/cliente">
+<div th:object="${lojista}">
+<form class="form-horizontal" method="POST" th:action="@{/cliente/{cnpj}(cnpj=${lojista.cpfCNPJ})}">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h1 class="panel-title">DIGITE AQUI SEU CPF</h1>
@@ -73,6 +73,7 @@
 	
 								
 </form>
+</div>
 </body>
 <script src="/js/jquery-1.11.0.min.js"></script>	
 <script src="/js/bootstrap.min.js"></script>

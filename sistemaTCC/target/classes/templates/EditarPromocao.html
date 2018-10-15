@@ -8,8 +8,8 @@
 
 </head>
 <body>
-
-	 <form id="form1" method="POST" action="/novaPromocao" th:object="${promocao}">	
+<div th:object="${promocao}">
+	 <form id="form1" method="POST" th:action="@{/novaPromocao/{cpf}(cpf=${{promocao.lojistaID}})}" >	
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">
@@ -38,6 +38,8 @@
 					</button>
 				</div>
 	 </form>	
+
+</div>
 
 
 </body>

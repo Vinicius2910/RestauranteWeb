@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -9,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 <body>
+<div th:object="${lojista}">
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -16,12 +18,13 @@
 				<a class="navbar-brand" href="#">WebSiteName</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="/homeLojista">Home</a></li>
-				<li><a href="/promocoes">Manter Promoções</a></li>
-				<li><a href="/premios">Manter Premio</a></li>
-				<li><a href="/parametro">Parametro</a></li>
-				<li class="active"><a href="/consultarClientes">Clientes Ativos</a></li>
-				<li><a href="/mediaClientes">Media Clientes</a></li>
+				<li><a href="/HomeLojista">Home</a></li>
+				<li><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
+				 >Manter Promoções</a></li>
+				<li><a th:href="@{/premiosPorId/{cpf}(cpf=${lojista.cpfCNPJ})}">Manter Premio</a></li>
+				<li><a th:href="@{/parametro/{cpf}(cpf=${lojista.cpfCNPJ})}">Parametro</a></li>
+				<li class="active"><a th:href="@{/consultarClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Clientes Ativos</a></li>
+				<li><a th:href="@{/mediaClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Media Clientes</a></li>
 				<li><a href="#">Sobre</a></li>
 			</ul>
 		</div>
@@ -49,6 +52,7 @@
 	   				</div>
 	   			</div>
 	   		</form>
+	   		
 			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
@@ -56,6 +60,7 @@
 						<th>NOME</th>
 						<th>TELEFONE</th>
 						<th>PONTUACAO</th>
+						<th>EXTRATO</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,6 +69,13 @@
 						<td th:text="${cliente.nome}"></td>
 						<td th:text="${cliente.telefone}"></td>
 						<td th:text="${cliente.pontuacao}"></td>
+						<td>
+							<button class="btn btn-danger btn-xs" data-title="Edit"
+								data-toggle="modal" data-target="#edit" th:href="@{/extrato/{cnpj}(cnpj=${lojista.cpfCNPJ}+'-'+${cliente.cpf})}">
+								<span class="glyphicon glyphicon-file"></span>
+							</button>
+						</td>
+						
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(cliente)}"> Nenhum cliente foi encontrado.</td>
@@ -71,46 +83,16 @@
 				</tbody>
 			</table>
 		</div>
-		<button type="button" class="btn btn-primary" data-title="Criar"
-			data-toggle="modal" data-target="#criar">Add cliente</button>
 	</div>
+</div>
 
 
-	<!-- MODAL CRUD -->
-	
-	<div class="modal fade" id="criar" tabindex="-1" role="dialog" aria-labelledby="criar" aria-hidden="true">
-	 <form id="form" method="post" action="/novoPremio">	
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-					<h4 class="modal-title custom_align" id="Heading">Criar novo
-						premio</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<input class="form-control " type="text" name="nome" placeholder="Nome premio">
-					</div>
-					<div class="form-group">
-
-						<input class="form-control " type="text" name="qtdPontos" placeholder="Quantidade de Pontos">
-					</div>
-					
-				</div>
-				<div class="modal-footer ">
-					<button type="submit" href="/premios" class="btn btn-success btn-lg" style="width: 100%;">
-						<span class="glyphicon glyphicon-ok-sign"></span> Criar novo
-						premio
-					</button>
-				</div>
+				<!-- /.CHAMANDO PAGINA EditarPromocao.html pelo controller -->
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
-	 </form>	
 	</div>
 
 </body>

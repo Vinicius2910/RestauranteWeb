@@ -9,24 +9,25 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 <body>
-
+<div th:object="${lojista}">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">WebSiteName</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="/homeLojista">Home</a></li>
-				<li><a href="/promocoes">Manter Promoções</a></li>
-				<li class="active"><a href="/premios">Manter Premio</a></li>
-				<li><a href="/parametro">Parametro</a></li>
-				<li><a href="/consultarClientes">Clientes Ativos</a></li>
-				<li><a href="/mediaClientes">Media Clientes</a></li>
+				<li><a href="/HomeLojista">Home</a></li>
+				<li><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
+				 >Manter Promoções</a></li>
+				<li class="active"><a th:href="@{/premiosPorId/{cpf}(cpf=${lojista.cpfCNPJ})}">Manter Premio</a></li>
+				<li><a th:href="@{/parametro/{cpf}(cpf=${lojista.cpfCNPJ})}">Parametro</a></li>
+				<li><a th:href="@{/consultarClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Clientes Ativos</a></li>
+				<li><a th:href="@{/mediaClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Media Clientes</a></li>
 				<li><a href="#">Sobre</a></li>
 			</ul>
 		</div>
 	</nav>
-
+</div>
 	<div class="panel panel-primary">
 
 		<div class="panel-heading">
@@ -73,7 +74,9 @@
 	<!-- MODAL CRUD -->
 	
 	<div class="modal fade" id="criar" tabindex="-1" role="dialog" aria-labelledby="criar" aria-hidden="true">
-	 <form id="form" method="post" action="/novoPremio">	
+	 <div th:object="${lojista}">
+	 
+	  <form id="form" method="post" th:action="@{/novoPremio/{cpf}(cpf=${lojista.cpfCNPJ})}">	
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -104,7 +107,8 @@
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal-dialog -->
-	 </form>	
+	 </form>
+	 </div>	
 	</div>
 
 	<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">

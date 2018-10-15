@@ -7,8 +7,9 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
 </head>
-	<body>
-		<div class="modal-header" >
+	<body th:object="${premio}" >
+		<form id="form1" method="POST" th:action="@{/redirectCliente/{cnpj}(cnpj=${{premio.lojistaID}})}">	
+		   <div class="modal-header" >
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -18,18 +19,22 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						O seu premio de foi resgatado com sucesso com sucesso!!
+						O seu premio <strong><span th:text="${premio.nome}"></span></strong> foi resgatado com sucesso com sucesso!!
 					</div>
 					<br></br>
-					<div class="form-group">
-						Sobrou o total de: pontos!!
+		
+					<div class="form-group" th:object="${cliente}">
+						Agora você possui <strong><span th:text="${cliente.pontuacao}"></span></span></strong> pontos!!
+					<input type="hidden" name="cpf" th:value="${cliente.cpf}"/>
 					</div>
 				</div>	
+				
 				<div class="modal-footer ">
-					<button type="button" class="btn btn-success btn-lg"
+					<button type="submit" class="btn btn-success btn-lg"	
 						style="width: 100%;">
 						<span class="glyphicon glyphicon-ok-sign"></span> Okay
 					</button>
 				</div>
+		</form>		
 	 </body>
 </html>

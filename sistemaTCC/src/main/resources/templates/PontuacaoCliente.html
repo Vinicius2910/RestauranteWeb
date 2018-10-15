@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
+<div th:object="${lojista}">
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -18,11 +19,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/homeLojista">Home</a></li>
-      <li><a href="/galeriaPromocoes">Galeria Promoções</a></li>
     </ul>
   </div>
 </nav>
-
 
 	<div class="panel panel-success">
 		<div class="panel-heading">
@@ -30,7 +29,7 @@
 		</div>
 	</div>
 	
-<div class="panel panel-primary">
+	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h1 class="panel-title">PREMIOS DISPONIVEIS</h1>
 		</div>
@@ -46,19 +45,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each= "premio : ${premios}" th:disabled="(${premio.qtdPontos} >= ${cliente.pontuacao}) ? 'false' : 'true' ">
+					<tr th:each= "premio : ${premios}">
 						<td th:text="${premio.codigo}"></td>
 						<td th:text="${premio.nome}"></td>
 						<td th:text="${{premio.qtdPontos}}" ></td>
 						<td>
 							<button class="btn btn-success btn-xs" data-title="Edit"
-								data-toggle="modal" data-target="#resgatar" th:href="@{/resgatarPremio/{codigo}(codigo= ${cliente.cpf} + '' +${premio.codigo})}">
+								data-toggle="modal" data-target="#resgatar" th:href="@{/resgatarPremio/{codigo}(codigo= ${cliente.cpf} + '-' +${premio.codigo})}">
 								<span class="glyphicon glyphicon-ok-sign"></span>
 							</button>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="6" th:if="${#lists.isEmpty(premios)}"> Nenhuma Promoção foi encontrada!! </td>
+						<td colspan="6" th:if="${#lists.isEmpty(premios)}"> Nenhuma Premio foi encontrada!! </td>
 					</tr>
 				</tbody>
 			</table>
@@ -95,16 +94,37 @@
 			</table>
 		</div>
 	</div>
+
+<form id="form" method="post" th:action="@{/pontos/{cnpj}(cnpj=${lojista.cpfCNPJ})}" >	
+<!-- Button (Double) -->
+<div class="form-group">
+  <div class="col-md-8">
+    <button class="btn btn-primary btn-lg" type="submit" >Confirmar
+    <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+  </div>
+</div>
+</form>
+	
+	<div class="modal fade" id="resgatar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- /.CHAMANDO PAGINA EditarPromocao.html pelo controller -->
+			</div>
+		</div>
+	</div>
 	
 
 <div class="modal fade" id="resgatar" tabindex="-1" role="dialog" aria-labelledby="resgatar" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
    		 <!-- /.modal-content --> 
-  	</div>
+    </div>
   </div>
       <!-- /.modal-dialog --> 
 </div>							
+</div>
+
 </body>
 <script src="/js/jquery-1.11.0.min.js"></script>	
 <script>

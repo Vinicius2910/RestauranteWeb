@@ -10,24 +10,26 @@
 </head>
 <body>
 
+<div th:object="${lojista}">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">WebSiteName</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="/homeLojista">Home</a></li>
-				<li class="active"><a href="/promocoes">Manter Promoções</a></li>
-				<li><a href="/premios">Manter Premio</a></li>
-				<li><a href="/parametro">Parametro</a></li>
-				<li><a href="/consultarClientes">Clientes Ativos</a></li>
-				<li><a href="/mediaClientes">Media Clientes</a></li>
+				<li><a href="/HomeLojista">Home</a></li>
+				<li class="active"><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
+				 >Manter Promoções</a></li>
+				<li><a th:href="@{/premiosPorId/{cpf}(cpf=${lojista.cpfCNPJ})}">Manter Premio</a></li>
+				<li><a th:href="@{/parametro/{cpf}(cpf=${lojista.cpfCNPJ})}">Parametro</a></li>
+				<li><a th:href="@{/consultarClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Clientes Ativos</a></li>
+				<li><a th:href="@{/mediaClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Media Clientes</a></li>
 				<li><a href="#">Sobre</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" th:object="${lojista}">
 
 		<div class="panel-heading">
 			<h1 class="panel-title">PROMOÇÕES ATIVAS</h1>
@@ -76,8 +78,10 @@
 	<!-- MODAL CRUD -->
 	
 	<div class="modal fade" id="criar" tabindex="-1" role="dialog" aria-labelledby="criar" aria-hidden="true">
-	 <form id="form" method="post" action="/novaPromocao">	
-		<div class="modal-dialog">
+	 <div th:object="${lojista}">
+		<form id="form" method="post" th:action="@{/novaPromocao/{cpf}(cpf=${lojista.cpfCNPJ})}">	
+		 
+		 <div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -89,10 +93,16 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
+						<input class="form-control " type="hidden" name="cpf" th:field="*{cpfCNPJ}">
+			    	</div>
+					<div class="form-group">
 						<input class="form-control " type="text" name="nome" placeholder="Nome promoção">
 					</div>
 					<div class="form-group">
-
+						<input class="form-control " type="hidden" name="lojistaID">
+					</div>
+					
+					<div class="form-group">
 						<input class="form-control " type="text" name="dataInicio" placeholder="Data inicio">
 					</div>
 					<div class="form-group">
@@ -107,9 +117,10 @@
 				</div>
 			</div>
 			<!-- /.modal-content -->
-		</div>
+		 </div>
+	  </form>	
+	 </div>
 		<!-- /.modal-dialog -->
-	 </form>	
 	</div>
 
 	<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -127,7 +138,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 </body>
 
 <script src="/js/jquery-1.11.0.min.js"></script>
