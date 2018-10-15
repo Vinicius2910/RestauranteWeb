@@ -10,7 +10,8 @@
 </head>
 <body>
 
-<form class="form-horizontal" method="post" action="/cadastrarCliente" th:object="${cliente}" >
+<div th:object="${lojista}">
+<form class="form-horizontal" method="post"  th:action="@{/cadastrarCliente/{cnpj}(cnpj=${lojista.cpfCNPJ})}" th:object="${cliente}" >
 <fieldset>
 <div class="panel panel-primary">
     <div class="panel-heading">Cadastro de Cliente</div>
@@ -73,7 +74,9 @@
 	</div>
 
 
-</form></body>
+</form>
+</div>
+</body>
 <script src="/js/jquery-1.11.0.min.js"></script>	
 <script>
 $(function(){

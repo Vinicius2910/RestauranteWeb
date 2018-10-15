@@ -8,7 +8,8 @@
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
-<body>
+<body>			
+<div th:object="${lojista}">
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -17,14 +18,19 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/HomeLojista">Home</a></li>
-				<li><a href="/promocoes">Manter Promoções</a></li>
-				<li><a href="/Premio">Manter Premio</a></li>
-				<li><a href="/parametro">Parametro</a></li>
+				<li><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
+				 >Manter Promoções</a></li>
+				<li><a th:href="@{/premiosPorId/{cpf}(cpf=${lojista.cpfCNPJ})}">Manter Premio</a></li>
+				<li><a th:href="@{/parametro/{cpf}(cpf=${lojista.cpfCNPJ})}">Parametro</a></li>
 				<li><a href="/consultarClientes">Clientes Ativos</a></li>
+				<li><a href="/mediaClientes">Media Clientes</a></li>
 				<li><a href="#">Sobre</a></li>
 			</ul>
 		</div>
 	</nav>
+<Strong><p>Bem vindo <span th:text="*{cpfCNPJ}"></span></p></Strong>
+<input type="hidden" th:field="*{cpfCNPJ}"/>
+</div>
 
 </body>
 

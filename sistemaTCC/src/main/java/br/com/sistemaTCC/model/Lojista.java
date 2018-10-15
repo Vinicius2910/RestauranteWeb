@@ -18,8 +18,13 @@ public class Lojista {
 	
 	@NotNull(message = "SENHA é obrigatória")
 	private String senha;
-	
-	
+
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public Long getCpfCNPJ() {
 		return cpfCNPJ;
 	}
