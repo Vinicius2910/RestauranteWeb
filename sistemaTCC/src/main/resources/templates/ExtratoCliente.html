@@ -39,8 +39,8 @@
 				</tbody>
 			</table>
 				</div>
-				<div class="modal-footer ">
-					<button class="btn btn-danger btn-sm" data-dismiss="modal" >Fechar</button>
+				<div class="modal-footer " th:object="${lojista}">
+					<a class="btn btn-danger btn-sm" th:href="@{/consultarClientes/{cpf}(cpf=${lojista.cpfCNPJ})}" >Fechar</a>
 				</div>
 </body>
 </html>

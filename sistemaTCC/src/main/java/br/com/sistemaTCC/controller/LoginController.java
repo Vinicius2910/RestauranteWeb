@@ -51,7 +51,7 @@ public class LoginController {
 			Lojista lojista = lojistas.getOne(cpf);
 			
 			if(existe == true ){
-				ModelAndView mv = new ModelAndView("HomeLojista");
+				ModelAndView mv = new ModelAndView("Promocoes");
 				mv.addObject("lojista",lojista);
 				return mv;
 			}
@@ -77,7 +77,7 @@ public class LoginController {
 				return mv;
 			}
 		}
-		if(tipo.equals("ClienteTablet")){
+		if(tipo.equals("LojistaTablet")){
 			boolean existe = lojistas.existsById(cpf);
 			Lojista lojista = lojistas.getOne(cpf);
 			if(existe == true){

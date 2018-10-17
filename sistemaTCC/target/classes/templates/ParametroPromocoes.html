@@ -18,8 +18,7 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-    			<li><a href="/HomeLojista">Home</a></li>
-				<li><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
+    			<li><a th:href="@{/promocoesPorLojista/{cpf}(cpf=${lojista.cpfCNPJ})}"
 				 >Manter Promoções</a></li>
 				<li><a th:href="@{/premiosPorId/{cpf}(cpf=${lojista.cpfCNPJ})}">Manter Premio</a></li>
 				<li class="active"><a th:href="@{/parametro/{cpf}(cpf=${lojista.cpfCNPJ})}">Parametro</a></li>
@@ -27,11 +26,17 @@
 				<li><a th:href="@{/mediaClientes/{cpf}(cpf=${lojista.cpfCNPJ})}">Media Clientes</a></li>
 				<li><a href="#">Sobre</a></li>
 	</ul>
+	<ul class="nav navbar-nav navbar-right">
+      			<li><a href="/login"><span class="glyphicon glyphicon-user"></span> Sair</a></li>
+    </ul>
   </div>
 </nav>
+<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+	<span th:text="${mensagem}"></span>
+</div>
+
 </div>
 <div th:object="${lojista}">
-
  <form class="form-horizontal" name="pontuacao" thod="post" th:action="@{/cadastrarParametro/{cpf}(cpf=${lojista.cpfCNPJ})}">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -66,8 +71,7 @@
 			  <div class="col-md-12">
 				<div class="form-group botoes">
 					<br>
-						<button type="submit" class="btn btn-success btn-sm" data-title="cadastrarParametro" 
-						data-toggle="modal" data-target="#cadastrarParametro"  >Cadastrar</button>
+						<button type="submit" class="btn btn-success btn-sm"   >Cadastrar</button>
   						<button class="btn btn-danger btn-sm ">Cancelar</button>
 				</div>
 			  </div>
@@ -79,6 +83,7 @@
 	
 </form>
 </div>
+
 <div class="modal fade" id="cadastrarParametro" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
  <form id="formParametro" method="POST" action="/cadastrarParamerto">	
 	

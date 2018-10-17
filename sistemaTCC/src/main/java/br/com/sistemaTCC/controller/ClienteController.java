@@ -237,11 +237,18 @@ public class ClienteController {
 		Lojista lojista = lojistas.getOne(cnpj);
 		ModelAndView mv= new ModelAndView("MediaClientes");
 		List<Cliente> cliente = clientes.findAll();
-		double media =  media(cliente);
-		int totalClientes = cliente.size();
-		mv.addObject("media", media);
-		mv.addObject("totalClientes", totalClientes);
-		mv.addObject("lojista", lojista);
+		if(cliente.size() > 1){
+			double media =  media(cliente);
+			int totalClientes = cliente.size();
+			mv.addObject("media", media);
+			mv.addObject("totalClientes", totalClientes);
+			mv.addObject("lojista", lojista);
+		}
+		else{
+			mv.addObject("media", 0);
+			mv.addObject("totalClientes", 0);
+			mv.addObject("lojista", lojista);
+		}
 		return mv;
 	}
 	
