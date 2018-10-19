@@ -119,7 +119,17 @@ public class ClienteController {
 				pontuacoes.save(pontucaoCliente);
 			}
 			
+			List<Transacao> listTransacao = transacoes.findAll();
+			List<Transacao> listTransacaoPorId = encontrarTransacao(listTransacao, cnpj);
+			int pontosPorLojista = contarPontos(listTransacaoPorId, cnpj);
+			
 			ModelAndView mv= new ModelAndView("PontuacaoCliente");
+			if(pontosPorLojista == 0 ){
+				mv.addObject("pontosPorLojista", cliente.getPontuacao());
+			}
+			else{
+				mv.addObject("pontosPorLojista", pontosPorLojista);
+			}
 			mv.addObject("cliente", cliente);
 			mv.addObject("lojista", lojista);
 			List<Premio> todosPremios = premios.findAll();
@@ -237,11 +247,18 @@ public class ClienteController {
 		Lojista lojista = lojistas.getOne(cnpj);
 		ModelAndView mv= new ModelAndView("MediaClientes");
 		List<Cliente> cliente = clientes.findAll();
-		double media =  media(cliente);
-		int totalClientes = cliente.size();
-		mv.addObject("media", media);
-		mv.addObject("totalClientes", totalClientes);
-		mv.addObject("lojista", lojista);
+		if(cliente.size() > 1){
+			double media =  media(cliente);
+			int totalClientes = cliente.size();
+			mv.addObject("media", media);
+			mv.addObject("totalClientes", totalClientes);
+			mv.addObject("lojista", lojista);
+		}
+		else{
+			mv.addObject("media", 0);
+			mv.addObject("totalClientes", 0);
+			mv.addObject("lojista", lojista);
+		}
 		return mv;
 	}
 	

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.sistemaTCC.model.Lojista;
 import br.com.sistemaTCC.model.Parametro;
@@ -30,9 +31,19 @@ public class ParametroController {
 		mv.addObject("lojista", lojista);
 		return mv;
 	}
+
+	@RequestMapping("/parametroSucesso/{cpf}")
+	public ModelAndView parametroSucesso(@PathVariable Long cpf, RedirectAttributes attributes){
+		Lojista lojista =  lojistas.getOne(cpf);
+		ModelAndView mv = new ModelAndView("ParametroPromocoes");
+		mv.addObject("lojista", lojista);
+		attributes.addFlashAttribute("mensagem", "Parametro salvo com sucesso!");
+		mv.addObject("mensagem", "Parametro salvo com sucesso!");
+		return mv;
+	}
 	
 	@RequestMapping("/cadastrarParametro/{cpf}")
-	public String cadastrarParametro(@PathVariable Long cpf, Parametro parametro){
+	public String cadastrarParametro(@PathVariable Long cpf, Parametro parametro, RedirectAttributes attributes){
 		List<Parametro> todosParametros =  parametros.findAll();
 		boolean exist = verificarPorLojistaId(todosParametros,cpf);
 		Lojista lojista =  lojistas.getOne(cpf);
@@ -44,6 +55,7 @@ public class ParametroController {
 			parametros.save(parametro);
 			ModelAndView mv = new ModelAndView("ParametroPromocoes");
 			mv.addObject("lojista", lojista);
+			attributes.addFlashAttribute("mensagem", "Parametro salvo com sucesso!");
 			return "redirect:/parametro/"+cpf;		
 		}
 		else{
@@ -53,6 +65,7 @@ public class ParametroController {
 			parametros.save(parametro1);
 			ModelAndView mv = new ModelAndView("ParametroPromocoes");
 			mv.addObject("lojista", lojista);
+			attributes.addFlashAttribute("mensagem", "Parametro salvo com sucesso!");
 			return "redirect:/parametro/"+cpf;	
 		}
 	}
