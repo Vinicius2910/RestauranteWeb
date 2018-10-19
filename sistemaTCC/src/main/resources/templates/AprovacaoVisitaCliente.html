@@ -15,13 +15,14 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">WebSiteName</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="/homeLojista">Home</a></li>
-				<li class="active"><a href="/promocoes">Aprovar pontos</a></li>
-				<li><a href="#">Sobre</a></li>
-			</ul>
+			<ul class="nav navbar-nav navbar-right">
+      			<li><a href="/login"><span class="glyphicon glyphicon-user"></span> Sair</a></li>
+    		</ul>
+		
 		</div>
 	</nav>
+
+<div th:object="${lojista}">
 
 	<div class="panel panel-primary">
 
@@ -48,7 +49,7 @@
 						<td>R$</td>
 						<td>
 							<button class="btn btn-success btn-xs" data-title="Edit"
-								data-toggle="modal" data-target="#edit" th:href="@{/caixa/{codigo}(codigo=${pendente.cpf})}">
+								data-toggle="modal" data-target="#edit" th:href="@{/caixa/{codigo}(codigo= ${pendente.cpf} + '-' +${lojista.cpfCNPJ})}">
 								<span class="glyphicon glyphicon-ok-sign"></span>
 							</button>
 							<button class="btn btn-danger btn-xs" data-title="Delete"
@@ -59,7 +60,7 @@
 					</tr>
 					
 					<tr>
-						<td colspan="6" th:if="${#lists.isEmpty(pontuacaoPendente)}"> Nenhuma Promoção foi encontrada!! </td>
+						<td colspan="6" th:if="${#lists.isEmpty(pontuacaoPendente)}"> Nenhuma pontuação pendente foi encontrada!! </td>
 					</tr>
 				</tbody>
 			</table>
@@ -109,7 +110,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 </body>
 
 <script src="/js/jquery-1.11.0.min.js"></script>

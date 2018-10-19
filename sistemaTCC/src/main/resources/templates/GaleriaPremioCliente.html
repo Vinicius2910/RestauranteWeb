@@ -17,8 +17,8 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/homeLojista">Home</a></li>
+    <ul class="nav navbar-nav navbar-right">
+      			<li><a href="/login"><span class="glyphicon glyphicon-user"></span> Sair</a></li>
     </ul>
   </div>
 </nav>
@@ -41,7 +41,6 @@
 						<th>ID</th>
 						<th>PREMIO</th>
 						<th>Quantidade Pontos</th>
-						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,12 +48,6 @@
 						<td th:text="${premio.codigo}"></td>
 						<td th:text="${premio.nome}"></td>
 						<td th:text="${{premio.qtdPontos}}" ></td>
-						<td>
-							<button class="btn btn-success btn-xs" data-title="Edit"
-								data-toggle="modal" data-target="#resgatar" th:href="@{/resgatarPremio/{codigo}(codigo= ${cliente.cpf} + '-' +${premio.codigo})}">
-								<span class="glyphicon glyphicon-ok-sign"></span>
-							</button>
-						</td>
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(premios)}"> Nenhuma Premio foi encontrada!! </td>

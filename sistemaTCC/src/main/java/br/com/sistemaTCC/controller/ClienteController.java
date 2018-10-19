@@ -119,7 +119,17 @@ public class ClienteController {
 				pontuacoes.save(pontucaoCliente);
 			}
 			
+			List<Transacao> listTransacao = transacoes.findAll();
+			List<Transacao> listTransacaoPorId = encontrarTransacao(listTransacao, cnpj);
+			int pontosPorLojista = contarPontos(listTransacaoPorId, cnpj);
+			
 			ModelAndView mv= new ModelAndView("PontuacaoCliente");
+			if(pontosPorLojista == 0 ){
+				mv.addObject("pontosPorLojista", cliente.getPontuacao());
+			}
+			else{
+				mv.addObject("pontosPorLojista", pontosPorLojista);
+			}
 			mv.addObject("cliente", cliente);
 			mv.addObject("lojista", lojista);
 			List<Premio> todosPremios = premios.findAll();
